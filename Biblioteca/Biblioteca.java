@@ -6,6 +6,10 @@ public class Biblioteca {
     private ArrayList<Livro> alLivros;
     private float investimento;
 
+    /**
+     * @author Andre Vinicius Zicka Schmidt
+     * @version 1.0
+     */
 
     // Construtor
     public Biblioteca(String nome) {
@@ -27,6 +31,10 @@ public class Biblioteca {
     public ArrayList<Livro> getAlLivros() {
         return alLivros;
     }
+    
+    public void addLivro(Livro livro) {
+    	this.alLivros.add(livro);
+    }
 
     public float getInvestimento() {
         return investimento;
@@ -37,12 +45,12 @@ public class Biblioteca {
     }
 
 
-    // Redefinição do método toString
+    // Redefinicao do metodo toString
     @Override
     public String toString() {
         return ("Biblioteca [Nome: " + nome + "Livros: " + alLivros + "Investimento: " + investimento);
     }
 
 
-    // Método compareTo (para ordenação)
+    // Metodo compareTo (para ordenacao)
 }

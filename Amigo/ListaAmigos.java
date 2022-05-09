@@ -26,6 +26,10 @@ public class ListaAmigos {
         return alAmigos;
     }
     
+    public void addAmigo(Amigo amigo) {
+    	this.alAmigos.add(amigo);
+    }
+    
     public int getListaAmigosSize() {
         return alAmigos.size();
     }
