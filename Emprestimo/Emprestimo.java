@@ -1,7 +1,8 @@
 package Emprestimo;
 import java.time.LocalDate;
-import Amigo.Amigo;
-import Biblioteca.Livro;
+
+import Amigo.*;
+import Biblioteca.*;
 
 /**
  * @author Andre Vinicius Zicka Schmidt
@@ -17,41 +18,31 @@ public class Emprestimo {
     private Amigo amigo;
 
     // Construtor
-    public Emprestimo(int idAmigo, int idLivro, Amigo amigo) {
+    public Emprestimo(int idAmigo, int idLivro, Biblioteca biblioteca, ListaAmigos amigos) {
         super();
-        this.idAmigo        = idAmigo;
         this.idLivro        = idLivro;
+        this.idAmigo        = idAmigo;
+        this.livro 			= biblioteca.getLivro(idLivro);
+        this.amigo 			= amigos.getAmigo(idAmigo);
         this.dataEmprestimo = LocalDate.now();
         this.dataDevolucao  = null;
-        this.livro = null;
-        this.amigo = amigo;
-    }
-    
-    public Emprestimo(int idAmigo, int idLivro, Livro livro, Amigo amigo) {
-        super();
-        this.idAmigo        = idAmigo;
-        this.idLivro        = idLivro;
-        this.dataEmprestimo = LocalDate.now();
-        this.dataDevolucao  = null;
-        this.livro = livro;
-        this.amigo = amigo;
     }
     
     // Getters & Setters
+    public int getIdLivro() {
+    	return idLivro;
+    }
+        
     public int getIdAmigo() {
         return idAmigo;
     }
-
-    public void setIdAmigo(int id) {
-        this.idAmigo = id;
+    
+    public Livro getLivro() {
+    	return livro;
     }
-
-    public int getIdLivro() {
-        return idLivro;
-    }
-
-    public void setIdLivro(int id) {
-        this.idLivro = id;
+    
+    public Amigo getAmigo() {
+    	return amigo;
     }
 
     public LocalDate getDataEmprestimo() {
@@ -66,24 +57,8 @@ public class Emprestimo {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(LocalDate data) {
-        this.dataDevolucao = data;
-    }
-
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
-    }
-
-    public Amigo getAmigo() {
-        return amigo;
-    }
-
-    public void setAmigo(Amigo amigo) {
-        this.amigo = amigo;
+    public void setDataDevolucao() {
+        this.dataDevolucao = LocalDate.now();
     }
 
 

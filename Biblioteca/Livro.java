@@ -14,9 +14,9 @@ public class Livro {
 
 
     // Construtor
-    public Livro(int idLivro, String titulo, String autor, float preco, Disponibilidade dispLivro) {
+    public Livro(String titulo, String autor, float preco, Disponibilidade dispLivro, Biblioteca biblioteca) {
         super();
-        this.idLivro   = idLivro;
+        this.idLivro   = biblioteca.getAlLivrosSize() + 1;
         this.titulo    = titulo;
         this.autor     = autor;
         this.preco     = preco;
@@ -27,10 +27,6 @@ public class Livro {
     // Getters & Setters
     public int getIdLivro() {
         return idLivro;
-    }
-
-    public void setIdLivro(int id) {
-        this.idLivro = id;
     }
 
     public String getTitulo() {
@@ -66,8 +62,18 @@ public class Livro {
     }
 
 
-    // Redefinição do método toString
+    // Redefinicao do metodo toString
+    @Override
+    public String toString() {
+    	return ("ID: " + this.idLivro + 
+    			"\nTitulo: " + this.titulo +
+    			"\nAutor: " + this.autor +
+    			"\nPreco: R$" + this.preco +
+    			"\nDisponibilidade: " + this.dispLivro);
+    }
 
-
-    // Método compareTo (para ordenação)
+    // Metodo compareTo (para ordenacao)
+    public int compareTo(Livro livro) {
+    	return this.titulo.compareTo(livro.getTitulo());
+    }
 }

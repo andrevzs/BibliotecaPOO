@@ -36,6 +36,10 @@ public class Biblioteca {
     	return alLivros.size();
     }
     
+    public Livro getLivro(int i) {
+    	return alLivros.get(i); 
+    }
+    
     public void addLivro(Livro livro) {
     	this.alLivros.add(livro);
     }
@@ -44,8 +48,10 @@ public class Biblioteca {
         return investimento;
     }
 
-    public void setInvestimento(float investimento) {
-        this.investimento = investimento;
+    public void setInvestimento() {
+    	for (int i=0; i<=alLivros.size(); i++) {
+    		this.investimento += alLivros.get(i).getPreco();    		
+    	}
     }
 
 

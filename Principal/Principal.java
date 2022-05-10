@@ -27,10 +27,10 @@ public class Principal {
 		boolean rodar   = true;
 		
 		// Criacao de livros como exemplo
-		Livro hamlet  = new Livro(0, "Hamlet", "William Shakespeare", 24.90f, Disponibilidade.DISPONIVEL);
-		Livro gray    = new Livro(1, "O Retrato de Dorian Gray", "Oscar Wilde", 29.86f, Disponibilidade.DISPONIVEL);
-		Livro jekyll  = new Livro(2, "O Medico e O Monstro", "Robert Louis Stevenson", 18.64f, Disponibilidade.DISPONIVEL);
-		Livro werther = new Livro(3, "Os Sofrimentos do Jovem Werther", "Goethe", 17.52f, Disponibilidade.DISPONIVEL);
+		Livro hamlet  = new Livro("Hamlet", "William Shakespeare", 24.90f, Disponibilidade.DISPONIVEL, biblioteca);
+		Livro gray    = new Livro("O Retrato de Dorian Gray", "Oscar Wilde", 29.86f, Disponibilidade.DISPONIVEL, biblioteca);
+		Livro jekyll  = new Livro("O Medico e O Monstro", "Robert Louis Stevenson", 18.64f, Disponibilidade.DISPONIVEL, biblioteca);
+		Livro werther = new Livro("Os Sofrimentos do Jovem Werther", "Goethe", 17.52f, Disponibilidade.DISPONIVEL, biblioteca);
 		
 		biblioteca.addLivro(hamlet);
 		biblioteca.addLivro(gray);
@@ -121,9 +121,6 @@ public class Principal {
 	private static void cadastrarLivro() {
 		Disponibilidade dispLivro = Disponibilidade.DISPONIVEL;
 		
-		// gerar id
-		int id = biblioteca.getAlLivrosSize() + 1;
-		
 		// perguntar titulo
 		System.out.println("Digite o titulo do livro: ");
 		String titulo = entrada.nextLine();
@@ -169,7 +166,7 @@ public class Principal {
 		}
 		
 		// Instanciar o livro cadastrado
-		Livro livro = new Livro(id, titulo, autor, preco, dispLivro);
+		Livro livro = new Livro(titulo, autor, preco, dispLivro, biblioteca);
 		
 		// Mostrar os dados do livro cadastrado
 		System.out.println();
@@ -188,9 +185,6 @@ public class Principal {
 	
 	private static void cadastrarAmigo() {
 		
-		// gerar id
-		int id = amigos.getListaAmigosSize() + 1;
-		
 		// perguntar nome
 		System.out.println("Digite o nome do amigo: ");
 		String nome = entrada.nextLine();
@@ -200,7 +194,7 @@ public class Principal {
 		String celular = entrada.nextLine();
 				
 		// Instanciar o amigo cadastrado
-		Amigo amigo = new Amigo(id, nome, celular);
+		Amigo amigo = new Amigo(nome, celular);
 		
 		// Mostrar os dados do amigo cadastrado
 				System.out.println();

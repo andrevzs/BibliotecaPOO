@@ -4,14 +4,16 @@ public class Amigo {
     private int idAmigo;
     private String nome;
     private String celular;
+    private ListaAmigos amigos;
 
     
     // Construtor
-    public Amigo(int idAmigo, String nome, String celular) {
+    public Amigo(int idAmigo, String nome, String celular, ListaAmigos amigos) {
         super();
-        this.idAmigo = idAmigo;
+        this.idAmigo = amigos.getListaAmigosSize() + 1;
         this.nome    = nome;
         this.celular = celular;
+        this.setAmigos(amigos);
     }
 
 
@@ -39,11 +41,22 @@ public class Amigo {
     public void setCelular(String celular) {
         this.celular = celular;
     }
+    
+
+	public ListaAmigos getAmigos() {
+		return amigos;
+	}
+
+	public void setAmigos(ListaAmigos amigos) {
+		this.amigos = amigos;
+	}
 
 
-    // Redefinição do método toString()
+    // Redefinicao do metodo toString()
     @Override
     public String toString() {
-        return "Amigo [idAmigo =" + idAmigo + ", nome =" + nome + "]";
+        return ("Amigo " + idAmigo + 
+        		"\nNome:" + nome + 
+        		"\nCelular: " + celular);
     }
 }
