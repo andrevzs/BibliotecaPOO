@@ -12,10 +12,10 @@ public class ListaAmigos {
     }
 
 
-    // Método para adicionar 01 amigo na lista
-    public int addAmigo(String nome, String celular) {
+    // Metodo para adicionar 01 amigo na lista
+    public int addAmigo(String nome, String celular, ListaAmigos amigos) {
         int idAmigo = alAmigos.size() + 1;
-        Amigo amigo = new Amigo(idAmigo, nome, celular);
+        Amigo amigo = new Amigo(nome, celular, amigos);
         alAmigos.add(amigo);
         return idAmigo;
     }
@@ -39,7 +39,7 @@ public class ListaAmigos {
     }
 
 
-    // Redefinição do método toString()
+    // Redefinicao do metodo toString()
     @Override
     public String toString() {
         return ("AlAmigos [" + alAmigos + "]");

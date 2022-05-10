@@ -1,7 +1,6 @@
 package Principal;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 import Amigo.*;
@@ -38,14 +37,16 @@ public class Principal {
 		biblioteca.addLivro(werther);
 		
 		// Criacao de amigos como exemplo
-		Amigo eduardo = new Amigo(0, "Eduardo Scaburi Costa Barros", "41 9 9851-1409");
-		Amigo luiz    = new Amigo(1, "Luiz Felipe Sprada de Medeiros", "41 9 9208-8710");
+		Amigo eduardo = new Amigo("Eduardo Scaburi Costa Barros", "41 9 9851-1409", amigos);
+		Amigo luiz    = new Amigo("Luiz Felipe Sprada de Medeiros", "41 9 9208-8710", amigos);
 		
 		amigos.addAmigo(eduardo);
 		amigos.addAmigo(luiz);
 		
 		while(rodar == true) {
 			int opcao 	    = 0;
+			
+			limparConsole();
 			System.out.println();
 			System.out.println("========= Bem vindo a Biblioteca POO! =========");
 			System.out.println("~~~~~    Escolha uma das opcoes abaixo    ~~~~~");
@@ -130,7 +131,7 @@ public class Principal {
 		String autor = entrada.nextLine();
 		
 		// perguntar preco
-		System.out.println("Digite o preco do livro (R$XX.XX): ");
+		System.out.println("Digite o preco do livro (R$XX,XX): ");
 		float preco = entrada.nextFloat();
 		entrada.nextLine();
 		
@@ -168,8 +169,12 @@ public class Principal {
 		// Instanciar o livro cadastrado
 		Livro livro = new Livro(titulo, autor, preco, dispLivro, biblioteca);
 		
+		// Adicionar o livro no arraylist da biblioteca
+		biblioteca.addLivro(livro);
+		
 		// Mostrar os dados do livro cadastrado
-		System.out.println();
+		limparConsole();
+		System.out.println("\n**********************************************");
 		System.out.println("O livro com os seguintes dados foi cadastrado:");
 		System.out.println();
 		System.out.println("Titulo: " + livro.getTitulo());
@@ -177,9 +182,8 @@ public class Principal {
 		System.out.println("Preco: R$" + String.format("%.2f", livro.getPreco()));
 		System.out.println("Disponibilidade: " + livro.getDispLivro());
 		
-		// Adicionar o livro no arraylist da biblioteca
-		biblioteca.addLivro(livro);
-		
+		System.out.println("***** Tecle enter para continuar *****");
+		entrada.nextLine();
 
 	}
 	
@@ -194,17 +198,21 @@ public class Principal {
 		String celular = entrada.nextLine();
 				
 		// Instanciar o amigo cadastrado
-		Amigo amigo = new Amigo(nome, celular);
-		
-		// Mostrar os dados do amigo cadastrado
-				System.out.println();
-				System.out.println("O amigo com os seguintes dados foi cadastrado:");
-				System.out.println();
-				System.out.println("Nome: " + amigo.getNome());
-				System.out.println("Celular: " + amigo.getCelular());
+		Amigo amigo = new Amigo(nome, celular, amigos);
 		
 		// adicionar amigo ao arraylist de amigos
 		amigos.addAmigo(amigo);
+		
+		// Mostrar os dados do amigo cadastrado
+		limparConsole();
+		System.out.println("\n**********************************************");
+		System.out.println("O amigo com os seguintes dados foi cadastrado:");
+		System.out.println();
+		System.out.println("Nome: " + amigo.getNome());
+		System.out.println("Celular: " + amigo.getCelular());
+				
+		System.out.println("***** Tecle enter para continuar *****");
+		entrada.nextLine();
 	}
 	
 	private static void emprestar() {
@@ -241,17 +249,14 @@ public class Principal {
 		int idAmigoSelecionado = entrada.nextInt();
 		entrada.nextLine();
 
-		// criar emprestimo
-		Livro livroSelecionado = biblioteca.getAlLivros().get((idLivroSelecionado));
-		Amigo amigoSelecionado = amigos.getAlAmigos().get((idAmigoSelecionado));
+		// criar emprestimo		
+		Emprestimo emprestimo = new Emprestimo(idAmigoSelecionado, idLivroSelecionado, biblioteca, amigos); 
 		
-		Emprestimo emprestimo = new Emprestimo(idAmigoSelecionado, idLivroSelecionado, livroSelecionado, amigoSelecionado); 
-		
-		// adicionar o livro ao arraylist de emprestimos
+		// adicionar o emprestimo ao arraylist de emprestimos
 		emprestimos.addEmprestimo(emprestimo);
 
 		// mudar a disponibilidade do livro para EMPRESTADO
-		livroSelecionado.setDispLivro(Disponibilidade.EMPRESTADO);
+		emprestimo.getLivro().setDispLivro(Disponibilidade.EMPRESTADO);
 		
 		System.out.println("\nO livro " + emprestimo.getLivro().getTitulo() + " foi emprestado para " + emprestimo.getAmigo().getNome());
 
@@ -300,32 +305,65 @@ public class Principal {
 		
 		// imprimir a biblioteca mostrando:
 		// titulo - disponibilidade - preco - investimento total biblioteca
-		System.out.println("Livros na biblioteca:");
+		System.out.println("Livros na biblioteca:\n");
 		for (int i=0; i<(biblioteca.getAlLivros().size()); i++) {
-			System.out.println("Titulo: ");
+			System.out.println("Titulo: " + biblioteca.getLivro(i).getTitulo());
+			System.out.println(biblioteca.getLivro(i).getDispLivro());
+			System.out.println("Preco: R$" + String.format("%.2f",biblioteca.getLivro(i).getPreco()));
 			System.out.println();
-			System.out.println("Preco: ");
 		}
-		System.out.println("Investimento total na biblioteca: R$" + String.format("%2f", biblioteca.getInvestimento()));
-
+		
+		biblioteca.setInvestimento();
+		System.out.println("Investimento total na biblioteca: R$" + String.format("%.2f", biblioteca.getInvestimento()));
+		System.out.println("***** Tecle enter para continuar *****");
+		entrada.nextLine();
 			
 	}
 	
 	private static void alterarEstado() {
 		// perguntar o id de um livro
+		System.out.println("De qual livro deseja alterar o estado?\n");
+		for (int i=0; i<(biblioteca.getAlLivros().size()); i++) {
+			System.out.println("Livro " + biblioteca.getLivro(i).getIdLivro() + " - " + biblioteca.getLivro(i).getTitulo());
+			System.out.println(biblioteca.getLivro(i).getDispLivro());
+			System.out.println();
+		}
+		System.out.println("Numero do livro escolhido: ");
+		int escolha = entrada.nextInt();
+		entrada.nextLine();
+		
+		Livro livroEscolhido = biblioteca.getLivro(escolha);
 		
 		
 		// perguntar o estado que deseja colocar
-		System.out.println("Selecione o estado que deseja");
+		System.out.println("\nSelecione o estado que deseja");
 		System.out.println("1- Disponivel");
 		System.out.println("2- Consulta local");
 		System.out.println("3- Emprestado");
 		System.out.println("4- Danificado");
 		System.out.println("5- Extraviado");
 		System.out.println("");
-		System.out.println("Digite uma opcao:");
+		System.out.println("Estado escolhido: ");
 		int disponibilidade = entrada.nextInt();
 		entrada.nextLine();
+		
+		switch (disponibilidade) {
+			case 1:
+				livroEscolhido.setDispLivro(Disponibilidade.DISPONIVEL);
+				break;
+			case 2:
+				livroEscolhido.setDispLivro(Disponibilidade.CONSULTALOCAL);
+				break;
+			case 3:
+				livroEscolhido.setDispLivro(Disponibilidade.EMPRESTADO);
+				break;
+			case 4:
+				livroEscolhido.setDispLivro(Disponibilidade.DANIFICADO);
+				break;
+			case 5:
+				livroEscolhido.setDispLivro(Disponibilidade.EXTRAVIADO);
+				break;
+		}
 		
 		// se estiver emprestado nao pode ser consulta local
 		
@@ -334,5 +372,26 @@ public class Principal {
 
 	private static void sair() {
 		System.exit(0);
+	}
+	
+	public final static void limparConsole()
+	{
+	    try
+	    {
+	        final String os = System.getProperty("os.name");
+
+	        if (os.contains("Windows"))
+	        {
+	            Runtime.getRuntime().exec("cls");
+	        }
+	        else
+	        {
+	            Runtime.getRuntime().exec("clear");
+	        }
+	    }
+	    catch (final Exception e)
+	    {
+	        //  Handle any exceptions.
+	    }
 	}
 }

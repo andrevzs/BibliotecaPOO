@@ -17,6 +17,7 @@ public class Emprestimo {
     private Livro livro;
     private Amigo amigo;
 
+    
     // Construtor
     public Emprestimo(int idAmigo, int idLivro, Biblioteca biblioteca, ListaAmigos amigos) {
         super();
@@ -27,6 +28,7 @@ public class Emprestimo {
         this.dataEmprestimo = LocalDate.now();
         this.dataDevolucao  = null;
     }
+    
     
     // Getters & Setters
     public int getIdLivro() {

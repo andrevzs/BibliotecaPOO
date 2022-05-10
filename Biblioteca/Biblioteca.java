@@ -1,15 +1,16 @@
 package Biblioteca;
 import java.util.ArrayList;
 
+/**
+ * @author Andre Vinicius Zicka Schmidt
+ * @version 1.0
+ */
+
 public class Biblioteca {
     private String nome;
     private ArrayList<Livro> alLivros;
     private float investimento;
 
-    /**
-     * @author Andre Vinicius Zicka Schmidt
-     * @version 1.0
-     */
 
     // Construtor
     public Biblioteca(String nome) {
@@ -49,7 +50,7 @@ public class Biblioteca {
     }
 
     public void setInvestimento() {
-    	for (int i=0; i<=alLivros.size(); i++) {
+    	for (int i=0; i<alLivros.size(); i++) {
     		this.investimento += alLivros.get(i).getPreco();    		
     	}
     }

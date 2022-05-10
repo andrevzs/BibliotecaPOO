@@ -22,6 +22,7 @@ public class ListaEmprestimos {
     	this.alEmprestimos.add(emprestimo);
     }
 
+    
     // Getters & Setters
     public ArrayList<Emprestimo> getAlEmprestimos() {
     	return alEmprestimos;

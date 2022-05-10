@@ -8,7 +8,7 @@ public class Amigo {
 
     
     // Construtor
-    public Amigo(int idAmigo, String nome, String celular, ListaAmigos amigos) {
+    public Amigo(String nome, String celular, ListaAmigos amigos) {
         super();
         this.idAmigo = amigos.getListaAmigosSize() + 1;
         this.nome    = nome;
@@ -20,10 +20,6 @@ public class Amigo {
     // Getters & Setters
     public int getIdAmigo() {
         return idAmigo;
-    }
-
-    public void setIdAmigo(int id) {
-        this.idAmigo = id;
     }
 
     public String getNome() {
