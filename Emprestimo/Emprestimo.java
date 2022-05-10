@@ -3,22 +3,38 @@ import java.time.LocalDate;
 import Amigo.Amigo;
 import Biblioteca.Livro;
 
+/**
+ * @author Andre Vinicius Zicka Schmidt
+ * @version 1.0
+ */
+
 public class Emprestimo {
     private int idAmigo;
     private int idLivro;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
-    
     private Livro livro;
     private Amigo amigo;
 
     // Construtor
-    public Emprestimo(int idAmigo, int idLivro, LocalDate dataEmprestimo, LocalDate dataDevolucao, Livro livro, Amigo amigo) {
+    public Emprestimo(int idAmigo, int idLivro, Amigo amigo) {
         super();
         this.idAmigo        = idAmigo;
         this.idLivro        = idLivro;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao  = dataDevolucao;
+        this.dataEmprestimo = LocalDate.now();
+        this.dataDevolucao  = null;
+        this.livro = null;
+        this.amigo = amigo;
+    }
+    
+    public Emprestimo(int idAmigo, int idLivro, Livro livro, Amigo amigo) {
+        super();
+        this.idAmigo        = idAmigo;
+        this.idLivro        = idLivro;
+        this.dataEmprestimo = LocalDate.now();
+        this.dataDevolucao  = null;
+        this.livro = livro;
+        this.amigo = amigo;
     }
     
     // Getters & Setters
@@ -42,8 +58,8 @@ public class Emprestimo {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(LocalDate data) {
-        this.dataEmprestimo = data;
+    public void setDataEmprestimo() {
+        this.dataEmprestimo = LocalDate.now();
     }
 
     public LocalDate getDataDevolucao() {
@@ -71,9 +87,9 @@ public class Emprestimo {
     }
 
 
-    // Redefiniçção do método toString()
+    // Redefinicao do metodo toString()
     @Override
     public String toString() {
-        return "foo";
+        return "Emprestimo\n" + "Livro: " + livro + "\nAmigo: " + amigo;
     }
 }

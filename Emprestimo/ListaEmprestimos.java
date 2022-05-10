@@ -1,6 +1,11 @@
 package Emprestimo;
 import java.util.ArrayList;
 
+/**
+ * @author Andre Vinicius Zicka Schmidt
+ * @version 1.0
+ */
+
 public class ListaEmprestimos {
     private ArrayList<Emprestimo> alEmprestimos;
 
@@ -12,13 +17,22 @@ public class ListaEmprestimos {
     }
 
 
-    // Método para adicionar 01 empréstimo na lista
-    
+    // Metodo para adicionar 01 emprestimo na lista
+    public void addEmprestimo(Emprestimo emprestimo) {
+    	this.alEmprestimos.add(emprestimo);
+    }
 
     // Getters & Setters
+    public ArrayList<Emprestimo> getAlEmprestimos() {
+    	return alEmprestimos;
+    }
+    
+    public int getEmprestimosSize() {
+    	return alEmprestimos.size();
+    }
 
 
-    // Redefinição do método toString
+    // Redefinicao do metodo toString
     @Override
     public String toString() {
         return "foo";

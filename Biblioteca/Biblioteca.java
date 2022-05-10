@@ -32,6 +32,10 @@ public class Biblioteca {
         return alLivros;
     }
     
+    public int getAlLivrosSize() {
+    	return alLivros.size();
+    }
+    
     public void addLivro(Livro livro) {
     	this.alLivros.add(livro);
     }

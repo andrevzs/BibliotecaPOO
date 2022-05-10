@@ -15,17 +15,34 @@ import Biblioteca.*;
  * Trabalho 1 - Controle de Biblioteca Pessoal
  */
 
-@SuppressWarnings("unused")
 public class Principal {
 	
-	private static Biblioteca biblioteca = new Biblioteca("Biblioteca Pessoal");
-	// private static ListaEmprestimos emprestimos  = new ListaEmprestimos();
-	private static ListaAmigos amigos 			= new ListaAmigos();
+	private static Biblioteca biblioteca 		 = new Biblioteca("Biblioteca Pessoal");
+	private static ListaEmprestimos emprestimos  = new ListaEmprestimos();
+	private static ListaAmigos amigos 			 = new ListaAmigos();
 	
 	static Scanner entrada = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		boolean rodar   = true;
+		
+		// Criacao de livros como exemplo
+		Livro hamlet  = new Livro(0, "Hamlet", "William Shakespeare", 24.90f, Disponibilidade.DISPONIVEL);
+		Livro gray    = new Livro(1, "O Retrato de Dorian Gray", "Oscar Wilde", 29.86f, Disponibilidade.DISPONIVEL);
+		Livro jekyll  = new Livro(2, "O Medico e O Monstro", "Robert Louis Stevenson", 18.64f, Disponibilidade.DISPONIVEL);
+		Livro werther = new Livro(3, "Os Sofrimentos do Jovem Werther", "Goethe", 17.52f, Disponibilidade.DISPONIVEL);
+		
+		biblioteca.addLivro(hamlet);
+		biblioteca.addLivro(gray);
+		biblioteca.addLivro(jekyll);
+		biblioteca.addLivro(werther);
+		
+		// Criacao de amigos como exemplo
+		Amigo eduardo = new Amigo(0, "Eduardo Scaburi Costa Barros", "41 9 9851-1409");
+		Amigo luiz    = new Amigo(1, "Luiz Felipe Sprada de Medeiros", "41 9 9208-8710");
+		
+		amigos.addAmigo(eduardo);
+		amigos.addAmigo(luiz);
 		
 		while(rodar == true) {
 			int opcao 	    = 0;
@@ -105,7 +122,7 @@ public class Principal {
 		Disponibilidade dispLivro = Disponibilidade.DISPONIVEL;
 		
 		// gerar id
-		int id = 0;
+		int id = biblioteca.getAlLivrosSize() + 1;
 		
 		// perguntar titulo
 		System.out.println("Digite o titulo do livro: ");
@@ -165,12 +182,14 @@ public class Principal {
 		
 		// Adicionar o livro no arraylist da biblioteca
 		biblioteca.addLivro(livro);
+		
+
 	}
 	
 	private static void cadastrarAmigo() {
 		
 		// gerar id
-		int id = 0;
+		int id = amigos.getListaAmigosSize() + 1;
 		
 		// perguntar nome
 		System.out.println("Digite o nome do amigo: ");
@@ -195,41 +214,62 @@ public class Principal {
 	}
 	
 	private static void emprestar() {
-		Livro livro = null;
+		ArrayList<Livro> livrosDisponiveis = new ArrayList<Livro>();
+		
+		// selecionar livros disponiveis
+		for (Livro livro : biblioteca.getAlLivros()) {
+			if (livro.getDispLivro() != Disponibilidade.EMPRESTADO && livro.getDispLivro() != Disponibilidade.EXTRAVIADO) {
+				livrosDisponiveis.add(livro);
+			}
+		}
 		
 		// mostrar livros disponiveis
 		System.out.println("Os seguintes livros estao disponiveis:\n");
+		for (int i=0; i<livrosDisponiveis.size(); i++) {
+			System.out.println("\nLivro " + livrosDisponiveis.get(i).getIdLivro());
+			System.out.println("Titulo: " + livrosDisponiveis.get(i).getTitulo());
+			System.out.println("Autor: " + livrosDisponiveis.get(i).getAutor());
+		}
 		
 		// perguntar o id do livro
-		System.out.println("Digite o id do livro que deseja emprestar: ");
-		entrada.nextInt();
+		System.out.println("\nDigite o numero do livro que deseja emprestar: ");
+		int idLivroSelecionado = entrada.nextInt();
+		entrada.nextLine();
 
 		// mostrar os amigos cadastrados
-		System.out.println();
+		System.out.println("\nOs amigos cadastrados sao:\n");
+		for (int i=0; i<amigos.getListaAmigosSize(); i++) {
+			System.out.println(amigos.getAmigo(i).getIdAmigo() + " " + amigos.getAmigo(i).getNome());
+		}
 
 		// perguntar o id do amigo
-		System.out.println("Digite o id do amigo que pegou o livro: ");
-		entrada.nextInt();
+		System.out.println("\nDigite o id do amigo que pegou o livro: ");
+		int idAmigoSelecionado = entrada.nextInt();
+		entrada.nextLine();
 
-		// selecionar o livro do arraylist da biblioteca
-
-
+		// criar emprestimo
+		Livro livroSelecionado = biblioteca.getAlLivros().get((idLivroSelecionado));
+		Amigo amigoSelecionado = amigos.getAlAmigos().get((idAmigoSelecionado));
+		
+		Emprestimo emprestimo = new Emprestimo(idAmigoSelecionado, idLivroSelecionado, livroSelecionado, amigoSelecionado); 
+		
 		// adicionar o livro ao arraylist de emprestimos
-
+		emprestimos.addEmprestimo(emprestimo);
 
 		// mudar a disponibilidade do livro para EMPRESTADO
-		// livro.setDispLivro(Disponibilidade.EMPRESTADO);
+		livroSelecionado.setDispLivro(Disponibilidade.EMPRESTADO);
+		
+		System.out.println("\nO livro " + emprestimo.getLivro().getTitulo() + " foi emprestado para " + emprestimo.getAmigo().getNome());
 
 	}
 	
 	private static void devolver() {
-		Livro livro;
-		
+			
 		// mostrar livros emprestados
-		System.out.println();
+		System.out.println("Os livros que estao emprestados sao:");
 
 		// perguntar o id do livro
-		System.out.println("Digite o id do livro que deseja devolver: ");
+		System.out.println("Digite o numero do livro que deseja devolver: ");
 		entrada.nextInt();
 		entrada.nextLine();
 
@@ -242,10 +282,10 @@ public class Principal {
 	}
 	
 	private static void listarEmprestimos() {
-		// adicionar livros selecionados a um arraylist de emprestados
-
-
 		// selecionar livros EMPRESTADOS do arraylist de emprestimos
+		for (Emprestimo emprestimo : emprestimos.getAlEmprestimos()) {
+			
+		}
 
 
 		// imprimir o arraylist de emprestados

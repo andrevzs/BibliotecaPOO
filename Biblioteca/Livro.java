@@ -1,5 +1,10 @@
 package Biblioteca;
 
+/**
+ * @author Andre Vinicius Zicka Schmidt
+ * @version 1.0
+ */
+
 public class Livro {
     private int idLivro;
     private String titulo;
