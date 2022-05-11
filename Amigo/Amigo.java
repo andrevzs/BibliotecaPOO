@@ -1,6 +1,11 @@
 package Amigo;
 
-public class Amigo {
+/**
+ * @author Andre Vinicius Zicka Schmidt
+ * @version 1.0
+ */
+
+public class Amigo implements Comparable<Amigo> {
     private int idAmigo;
     private String nome;
     private String celular;
@@ -55,4 +60,12 @@ public class Amigo {
         		"\nNome:" + nome + 
         		"\nCelular: " + celular);
     }
+
+
+	
+    @Override
+	public int compareTo(Amigo o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

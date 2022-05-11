@@ -1,6 +1,11 @@
 package Amigo;
 import java.util.ArrayList;
 
+/**
+ * @author Andre Vinicius Zicka Schmidt
+ * @version 1.0
+ */
+
 public class ListaAmigos {
     public ArrayList<Amigo> alAmigos;
 

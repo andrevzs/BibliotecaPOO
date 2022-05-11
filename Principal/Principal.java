@@ -260,24 +260,34 @@ public class Principal {
 		emprestimo.getLivro().setDispLivro(Disponibilidade.EMPRESTADO);
 		
 		System.out.println("\nO livro " + emprestimo.getLivro().getTitulo() + " foi emprestado para " + emprestimo.getAmigo().getNome());
+		System.out.println("***** Tecle enter para continuar *****");
+		entrada.nextLine();
 
 	}
 	
 	private static void devolver() {
 			
 		// mostrar livros emprestados
-		System.out.println("Os livros que estao emprestados sao:");
+		System.out.println("Os livros que estao emprestados sao:\n");
+		for (int i=0; i<emprestimos.getEmprestimosSize(); i++) {
+			System.out.println((i+1) + " - " + emprestimos.getAlEmprestimos().get(i).getLivro().getTitulo());
+			System.out.println();
+		}
 
 		// perguntar o id do livro
 		System.out.println("Digite o numero do livro que deseja devolver: ");
-		entrada.nextInt();
+		int idLivroSelecionado = entrada.nextInt();
 		entrada.nextLine();
 
 		// selecionar o livro do arraylist
-
+		Emprestimo emprestimoSelecionado = emprestimos.getAlEmprestimos().get(idLivroSelecionado);
 
 		// mudar a disponibilidade do livro para DISPONIVEL
-		// livro.setDispLivro(Disponibilidade.DISPONIVEL);
+		emprestimoSelecionado.getLivro().setDispLivro(Disponibilidade.DISPONIVEL);
+		
+		System.out.println("\nO livro " + emprestimoSelecionado.getLivro().getTitulo() + " foi devolvido.");
+		System.out.println("***** Tecle enter para continuar *****");
+		entrada.nextLine();
 
 	}
 	

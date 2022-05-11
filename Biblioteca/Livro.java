@@ -73,6 +73,7 @@ public class Livro implements Comparable<Livro> {
     }
 
     // Metodo compareTo (para ordenacao)
+    @Override
     public int compareTo(Livro livro) {
     	return this.titulo.compareTo(livro.getTitulo());
     }
