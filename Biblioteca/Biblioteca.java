@@ -46,13 +46,10 @@ public class Biblioteca {
     }
 
     public float getInvestimento() {
-        return investimento;
-    }
-
-    public void setInvestimento() {
     	for (int i=0; i<alLivros.size(); i++) {
     		this.investimento += alLivros.get(i).getPreco();    		
     	}
+    	return investimento;
     }
 
 

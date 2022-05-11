@@ -5,7 +5,7 @@ package Biblioteca;
  * @version 1.0
  */
 
-public class Livro {
+public class Livro implements Comparable<Livro> {
     private int idLivro;
     private String titulo;
     private String autor;

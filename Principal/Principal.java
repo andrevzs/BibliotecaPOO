@@ -1,6 +1,7 @@
 package Principal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import Amigo.*;
@@ -306,14 +307,14 @@ public class Principal {
 		// imprimir a biblioteca mostrando:
 		// titulo - disponibilidade - preco - investimento total biblioteca
 		System.out.println("Livros na biblioteca:\n");
+		Collections.sort(biblioteca.getAlLivros());
 		for (int i=0; i<(biblioteca.getAlLivros().size()); i++) {
 			System.out.println("Titulo: " + biblioteca.getLivro(i).getTitulo());
 			System.out.println(biblioteca.getLivro(i).getDispLivro());
 			System.out.println("Preco: R$" + String.format("%.2f",biblioteca.getLivro(i).getPreco()));
 			System.out.println();
 		}
-		
-		biblioteca.setInvestimento();
+
 		System.out.println("Investimento total na biblioteca: R$" + String.format("%.2f", biblioteca.getInvestimento()));
 		System.out.println("***** Tecle enter para continuar *****");
 		entrada.nextLine();
