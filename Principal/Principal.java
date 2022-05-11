@@ -325,12 +325,12 @@ public class Principal {
 		// perguntar o id de um livro
 		System.out.println("De qual livro deseja alterar o estado?\n");
 		for (int i=0; i<(biblioteca.getAlLivros().size()); i++) {
-			System.out.println("Livro " + biblioteca.getLivro(i).getIdLivro() + " - " + biblioteca.getLivro(i).getTitulo());
+			System.out.println("Livro " + (i+1) + " - " + biblioteca.getLivro(i).getTitulo());
 			System.out.println(biblioteca.getLivro(i).getDispLivro());
 			System.out.println();
 		}
 		System.out.println("Numero do livro escolhido: ");
-		int escolha = entrada.nextInt();
+		int escolha = entrada.nextInt() - 1;
 		entrada.nextLine();
 		
 		Livro livroEscolhido = biblioteca.getLivro(escolha);
