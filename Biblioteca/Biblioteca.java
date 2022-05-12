@@ -41,8 +41,9 @@ public class Biblioteca {
     	return alLivros.get(i); 
     }
     
-    public void addLivro(Livro livro) {
-    	this.alLivros.add(livro);
+    public void addLivro(String titulo, String autor, float preco) {
+    	int id = alLivros.size() + 1;
+    	this.alLivros.add(new Livro(id, titulo, autor, preco));
     }
 
     public float getInvestimento() {

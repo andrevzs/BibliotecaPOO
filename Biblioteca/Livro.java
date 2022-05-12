@@ -14,13 +14,13 @@ public class Livro implements Comparable<Livro> {
 
 
     // Construtor
-    public Livro(String titulo, String autor, float preco, Disponibilidade dispLivro, Biblioteca biblioteca) {
+    public Livro(int id, String titulo, String autor, float preco) {
         super();
-        this.idLivro   = biblioteca.getAlLivrosSize() + 1;
+        this.idLivro   = id;
         this.titulo    = titulo;
         this.autor     = autor;
         this.preco     = preco;
-        this.dispLivro = dispLivro;
+        this.dispLivro = Disponibilidade.DISPONIVEL;
     }
 
 

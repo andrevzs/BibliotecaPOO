@@ -22,6 +22,9 @@ public class ListaEmprestimos {
     	this.alEmprestimos.add(emprestimo);
     }
 
+    public void removeEmprestimo(Emprestimo emprestimo) {
+    	this.alEmprestimos.remove(emprestimo);
+    }
     
     // Getters & Setters
     public ArrayList<Emprestimo> getAlEmprestimos() {
