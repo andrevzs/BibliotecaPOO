@@ -23,8 +23,8 @@ public class Emprestimo {
         super();
         this.idLivro        = idLivro;
         this.idAmigo        = idAmigo;
-        this.livro 			= biblioteca.getLivro(idLivro);
-        this.amigo 			= amigos.getAmigo(idAmigo);
+        this.livro 			= biblioteca.getLivro(idLivro-1);
+        this.amigo 			= amigos.getAmigo(idAmigo-1);
         this.dataEmprestimo = LocalDate.now();
         this.dataDevolucao  = null;
     }

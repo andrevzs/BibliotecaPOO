@@ -9,16 +9,14 @@ public class Amigo implements Comparable<Amigo> {
     private int idAmigo;
     private String nome;
     private String celular;
-    private ListaAmigos amigos;
 
     
     // Construtor
-    public Amigo(String nome, String celular, ListaAmigos amigos) {
+    public Amigo(int id, String nome, String celular) {
         super();
-        this.idAmigo = amigos.getListaAmigosSize() + 1;
+        this.idAmigo = id;
         this.nome    = nome;
         this.celular = celular;
-        this.setAmigos(amigos);
     }
 
 
@@ -42,15 +40,6 @@ public class Amigo implements Comparable<Amigo> {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-    
-
-	public ListaAmigos getAmigos() {
-		return amigos;
-	}
-
-	public void setAmigos(ListaAmigos amigos) {
-		this.amigos = amigos;
-	}
 
 
     // Redefinicao do metodo toString()
