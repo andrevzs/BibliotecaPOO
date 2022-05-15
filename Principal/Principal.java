@@ -2,6 +2,7 @@ package Principal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Scanner;
 
 import Amigo.*;
@@ -279,11 +280,36 @@ public class Principal {
 	}
 	
 	private static void listarHistorico() {
-		// perguntar o id do livro que quer saber
+		@SuppressWarnings("unchecked")
+		ArrayList<Livro> bibliotecaOrdenada = (ArrayList<Livro>) biblioteca.getAlLivros().clone();
+		Collections.sort(bibliotecaOrdenada);
 		
+		System.out.println("Livros na biblioteca:\n");
+		
+		for (int i=0; i<(biblioteca.getAlLivros().size()); i++) {
+			System.out.println("Livro " + (i+1) + " " + bibliotecaOrdenada.get(i).getTitulo());
+			System.out.println(bibliotecaOrdenada.get(i).getDispLivro());
+			System.out.println();
+		}
+		
+		// perguntar o id do livro que quer saber
+		System.out.println("\nDigite o numero do livro que deseja: ");
+		int idSelecionado = entrada.nextInt();		
+		Livro livroSelecionado = biblioteca.getLivro(idSelecionado-1);
 		
 		// imprimir as informacoes de emprestimo do livro
-		System.out.println();
+		for (Emprestimo emprestimo:emprestimos.getAlEmprestimos()) {
+			if (emprestimo.getLivro().getTitulo() == livroSelecionado.getTitulo()) {
+				System.out.println("\nLivro: " + emprestimo.getLivro().getTitulo());
+				System.out.println("Emprestado para: " + emprestimo.getAmigo().getNome());
+				System.out.println("Data de emprestimo: " + emprestimo.getDataEmprestimo());
+				System.out.println("Data de devolucao:  " + emprestimo.getDataDevolucao());
+				
+			}
+		}
+		
+		System.out.println("\n***** Tecle enter para continuar *****");
+		entrada.nextLine();
 	}
 	
 	private static void listarBiblioteca() {
