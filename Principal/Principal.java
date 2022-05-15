@@ -223,14 +223,16 @@ public class Principal {
 	private static void devolver() {
 			
 		// mostrar livros emprestados
-		System.out.println("Os livros que estao emprestados sao:\n");
 		if (emprestimos.getEmprestimosSize() == 0) {
 			System.out.println("Nao ha livros emprestados!");
 		}
 		else {
+			System.out.println("Os livros que estao emprestados sao:\n");
 			for (int i=0; i<emprestimos.getEmprestimosSize(); i++) {
-				System.out.println((i+1) + " - " + emprestimos.getAlEmprestimos().get(i).getLivro().getTitulo());
-				System.out.println();
+				if ((emprestimos.getAlEmprestimos().get(i).getDataDevolucao() == null)) {
+					System.out.println((i+1) + " - " + emprestimos.getAlEmprestimos().get(i).getLivro().getTitulo());
+					System.out.println();
+				}
 			}
 	
 			// perguntar o id do livro
@@ -255,7 +257,7 @@ public class Principal {
 	private static void listarEmprestimos() {
 		// selecionar livros EMPRESTADOS do arraylist de emprestimos
 		for (int i=0; i<emprestimos.getEmprestimosSize(); i++) {
-			if ((emprestimos.getAlEmprestimos().get(i).getLivro().getDispLivro()) == Disponibilidade.EMPRESTADO) {
+			if ((emprestimos.getAlEmprestimos().get(i).getDataDevolucao()) == null) {
 				Emprestimo emprestimo = emprestimos.getAlEmprestimos().get(i);
 				emprestados.addEmprestimo(emprestimo);
 			}
@@ -266,7 +268,9 @@ public class Principal {
 		System.out.println("Os livros que estao emprestados atualmente sao:");
 		
 		for (int i=0; i<emprestados.getEmprestimosSize(); i++) {
-			System.out.println("\n" + (i+1) + " - " + emprestados.getAlEmprestimos().get(i).getLivro().getTitulo());
+			if ((emprestimos.getAlEmprestimos().get(i).getDataDevolucao() == null)) {
+				System.out.println("\n" + (i+1) + " - " + emprestados.getAlEmprestimos().get(i).getLivro().getTitulo());				
+			}
 		}
 		
 		System.out.println("\n***** Tecle enter para continuar *****");
